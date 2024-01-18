@@ -2,7 +2,7 @@ package org.example.hw3.service;
 
 
 
-import org.example.hw3.entity.IssueRequest;
+import org.example.hw3.controller.IssueRequest;
 import org.example.hw3.entity.Issue;
 import org.example.hw3.repository.BookRepository;
 import org.example.hw3.repository.IssueRepository;

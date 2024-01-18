@@ -2,7 +2,6 @@ package org.example.hw3.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.hw3.entity.Issue;
-import org.example.hw3.entity.IssueRequest;
 import org.example.hw3.service.IssuerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

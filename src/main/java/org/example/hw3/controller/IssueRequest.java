@@ -1,8 +1,8 @@
-package org.example.hw3.entity;
+package org.example.hw3.controller;
 
 
 import lombok.Data;
-import lombok.Getter;
+
 
 /**
  * Запрос на выдачу

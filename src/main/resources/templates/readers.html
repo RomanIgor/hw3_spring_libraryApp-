@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Readers List</title>
+</head>
+<body>
+    <h1>Readers List</h1>
+    <ul>
+        <li th:each="reader : ${readers}" th:text="${reader.getName()}"></li>
+    </ul>
+</body>
+</html>
