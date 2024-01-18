@@ -27,10 +27,6 @@
         <td th:text="${issue.getIssued_at()}"></td>
         <td th:if="${issue.getReturned_at() != null}" th:text="${issue.getReturned_at()}"></td>
         <td th:if="${issue.getReturned_at() == null}">Not Returned</td>
-
-
-
-
     </tr>
     </tbody>
 </table>
