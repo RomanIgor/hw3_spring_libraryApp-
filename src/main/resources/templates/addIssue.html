@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Issue</title>
+</head>
+<body>
+<h1>Add New Issue</h1>
+<form th:action="@{/ui/issue/add}" th:object="${issueRequest}" method="post">
+    <label>Book:</label>
+    <select th:field="*{bookId}">
+        <option th:each="book : ${availableBooks}" th:value="${book.id}" th:text="${book.name}"></option>
+    </select><br>
+
+    <label>Reader:</label>
+    <select th:field="*{readerId}">
+        <option th:each="reader : ${availableReaders}" th:value="${reader.id}" th:text="${reader.name}"></option>
+    </select><br>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

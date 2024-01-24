@@ -1,37 +1,14 @@
 package org.example.hw3.service;
 
 import org.example.hw3.entity.Book;
-import org.example.hw3.repository.BookRepository;
-
-import org.springframework.stereotype.Service;
-
-
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class BookService {
+public interface BookService {
+    List<Book> getAllBooks();
+     Optional<Book> getBookById(Long id);
 
-    private final BookRepository bookRepository;
+     Book addNewBook(Book book);
 
-    public BookService(BookRepository bookRepository) {
-
-        this.bookRepository = bookRepository;
-    }
-
-    public Book getBookById(long id){
-        return bookRepository.getBookById(id);
-    }
-
-
-    public List<Book>allBooks(){
-        return bookRepository.getAllBooks();
-    }
-
-    public List<Book>deleteBook(long id){
-        return bookRepository.deleteBookById(id);
-    }
-
-    public List<Book>addBook(Book book){
-        return bookRepository.addBook(book);
-    }
+     void deleteBook(Long id);
 }

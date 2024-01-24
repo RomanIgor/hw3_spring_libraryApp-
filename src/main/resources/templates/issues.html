@@ -8,21 +8,30 @@
 <h1>Issues List</h1>
 <table border="1">
     <thead>
+    <thead>
     <tr>
-        <th>Book</th>
-        <th>Reader</th>
+        <th>ID</th>
         <th>Issued Date</th>
         <th>Returned Date</th>
+        <th>Book</th>
+        <th>Reader</th>
     </tr>
     </thead>
+
+    </thead>
+
     <tbody>
-    <tr th:each="issue : ${issues}">
-        <td th:text="${issue.getBookId()}"></td>
-        <td th:text="${issue.getReaderId()}"></td>
+    <tr th:each="issue : ${allIssues}">
+        <td th:text="${issue.id}"></td>
         <td th:text="${issue.getIssued_at()}"></td>
-        <td th:text="${issue.getReturned_at()}"></td>
+        <td th:if="${issue.getReturned_at() != null}" th:text="${issue.getReturned_at()}"></td>
+        <td th:if="${issue.getReturned_at() == null}">Not Returned</td>
+        <td th:if="${issue.book != null and issue.book.name != null}" th:text="${issue.book.name}"></td>
+        <td th:if="${issue.reader != null}" th:text="${issue.reader.name}"></td>
     </tr>
     </tbody>
+
+
 </table>
 </body>
 </html>

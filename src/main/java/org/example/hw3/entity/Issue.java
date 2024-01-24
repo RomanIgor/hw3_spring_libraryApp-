@@ -1,29 +1,37 @@
 package org.example.hw3.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
-/**
- * Запись о факте выдачи книги (в БД)
- */
 @Data
+@Entity
+@Table(name = "issue")
 public class Issue {
 
-  public static long sequence = 1L;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  private final long id;
-  private final long bookId;
-  private final long readerId;
+  @ManyToOne
+  @JoinColumn(name = "reader_id")
+  private Reader reader;
 
-  private  LocalDateTime issued_at;
-  private  LocalDateTime returned_at;
+  @ManyToOne
+  @JoinColumn(name = "book_id")
+  private Book book;
 
-  public Issue(long bookId, long readerId) {
-    this.id = sequence++;
-    this.bookId = bookId;
-    this.readerId = readerId;
-    this.issued_at = LocalDateTime.now();
-    this.returned_at=null;
+  private LocalDateTime issued_at;
+  private LocalDateTime returned_at;
+
+  public Issue() {
   }
+
+  public Issue(Book book, Reader reader) {
+    this.book = book;
+    this.reader = reader;
+    this.issued_at = LocalDateTime.now();
+    this.returned_at = null;
+  }
+
 }

@@ -1,22 +1,28 @@
 package org.example.hw3.entity;
 
-
+import jakarta.persistence.*;
 import lombok.Data;
+import java.util.List;
 
 @Data
-
+@Entity
+@Table(name = "book")
 public class Book {
 
-  private static long sequence = 1L;
-  private long id;
-  private  String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
 
-    public Book(String name) {
-        this();
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "book")
+    private List<Issue> issues;
+
     public Book() {
-        this.id = sequence++;
+    }
+
+    public Book(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
 }

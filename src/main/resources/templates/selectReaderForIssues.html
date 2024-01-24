@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Reader for Issues</title>
+</head>
+<body>
+<h1>Select Reader</h1>
+<form th:action="@{/ui/issue/issue}" th:object="${issueRequest}" method="post">
+  <label>Reader:</label>
+  <select th:field="*{readerId}">
+    <option th:each="reader : ${availableReaders}" th:value="${reader.id}" th:text="${reader.name}"></option>
+  </select><br>
+  <button type="submit">Show Reader's Issues</button>
+</form>
+</body>
+</html>
