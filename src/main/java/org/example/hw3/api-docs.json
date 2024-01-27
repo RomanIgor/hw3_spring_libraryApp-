@@ -1,0 +1,167 @@
+
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/ui/issue/issue": {
+      "get": {
+        "tags": [
+          "Issue"
+        ],
+        "summary": "Show reader issues form",
+        "description": "Display the form to select a reader for issues.",
+        "operationId": "showReaderIssuesForm",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Issue"
+        ],
+        "summary": "Show reader issues",
+        "description": "Display issues associated with a specific reader.",
+        "operationId": "showReaderIssues",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ui/issue/add": {
+      "get": {
+        "tags": [
+          "Issue"
+        ],
+        "summary": "Show issue form",
+        "description": "Display the form to add a new issue.",
+        "operationId": "showAddIssueForm",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Issue"
+        ],
+        "summary": "Add a new issue",
+        "description": "Add a new issue based on the provided request.",
+        "operationId": "addIssue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IssueRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Issue added successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ui/issue/all": {
+      "get": {
+        "tags": [
+          "Issue"
+        ],
+        "summary": "Show all issues",
+        "description": "Display a html page that contains a table with all issues.",
+        "operationId": "showAllIssues",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IssueRequest": {
+        "type": "object",
+        "properties": {
+          "readerId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bookId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}
