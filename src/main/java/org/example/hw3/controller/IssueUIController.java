@@ -1,4 +1,6 @@
 package org.example.hw3.controller;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.hw3.entity.Book;
 import org.example.hw3.entity.Issue;
 import org.example.hw3.entity.IssueRequest;
@@ -14,6 +16,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/ui/issue")
+@Tag(name = "Issue")
 public class IssueUIController {
 
     private final IssueService issueService;
@@ -28,6 +31,7 @@ public class IssueUIController {
         this.readerService = readerService;
     }
 
+    @Operation(summary = "Show issue form", description = "Return a html page with a simple form that contains all  Books and Readers")
     @GetMapping("/add")
     public String showAddIssueForm(Model model) {
         List<Book> availableBooks = bookService.getAllBooks();
@@ -39,6 +43,7 @@ public class IssueUIController {
         return "addIssue";
     }
 
+    @Operation(summary = "Add a new issue")
     @PostMapping("/add")
     public String addIssue(@ModelAttribute IssueRequest issueRequest) {
         issueService.addNewIssue(issueRequest);
@@ -46,6 +51,7 @@ public class IssueUIController {
     }
 
 
+    @Operation(summary = "Show all issues")
     @GetMapping("/all")
     public String showAllIssues(Model model) {
         List<Issue> allIssues = issueService.getAllIssues();
@@ -56,6 +62,8 @@ public class IssueUIController {
     }
 
 
+
+    @Operation(summary = "Show reader issues form")
     @GetMapping("/issue")
     public String showReaderIssuesForm(Model model) {
         List<Reader> availableReaders = readerService.getAllReaders();
@@ -65,6 +73,7 @@ public class IssueUIController {
         return "selectReaderForIssues";
     }
 
+    @Operation(summary = "Show reader issues")
     @PostMapping("/issue")
     public String showReaderIssues(@ModelAttribute IssueRequest issueRequest, Model model) {
         long readerId = issueRequest.getReaderId();
