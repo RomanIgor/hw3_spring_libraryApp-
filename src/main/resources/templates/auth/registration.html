@@ -1,0 +1,84 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .registration-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        .registration-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .registration-container input[type="text"],
+        .registration-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .registration-container input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .registration-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="registration-container">
+    <h2>Sign Up</h2>
+    <form th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}"/>
+        <div class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        <br/>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" th:field="*{email}"/>
+        <div class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <br/>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}"/>
+        <div class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <br/>
+
+        <input type="submit" value="Sign Up!"/>
+    </form>
+</div>
+</body>
+</html>

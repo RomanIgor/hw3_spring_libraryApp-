@@ -14,3 +14,15 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger-ui-custom.html
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+
+# application.yml
+
+jwt_secret: SECRET
+
+

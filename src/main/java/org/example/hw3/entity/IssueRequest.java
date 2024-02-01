@@ -1,15 +1,19 @@
 package org.example.hw3.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+
 import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 
 @Data
 @Entity
 @Table(name = "issuerequest")
-public class IssueRequest {
+public class IssueRequest implements Serializable {
 
   @Id
   private long readerId;

@@ -9,9 +9,14 @@ import org.example.hw3.entity.IssueRequest;
 import org.example.hw3.entity.Reader;
 import org.example.hw3.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,15 +56,17 @@ public class IssueUIController {
             @ApiResponse(responseCode = "200", description = "Issue added successfully"),
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
+
     @PostMapping("/add")
     public String addIssue(@ModelAttribute IssueRequest issueRequest) {
         issueService.addNewIssue(issueRequest);
-        return "redirect:/ui/issue/all";
+        return "redirect:/ui/issue/add";
     }
 
 
 
     @Operation(summary = "Show all issues", description = "Display a html page that contains a table with all issues.")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public String showAllIssues(Model model) {
         List<Issue> allIssues = issueService.getAllIssues();
@@ -69,11 +76,14 @@ public class IssueUIController {
     }
 
     @Operation(summary = "Show reader issues form", description = "Display the form to select a reader for issues.")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/issue")
     public String showReaderIssuesForm(Model model) {
         List<Reader> availableReaders = readerService.getAllReaders();
         model.addAttribute("availableReaders", availableReaders);
         model.addAttribute("issueRequest", new IssueRequest());
+
+
 
         return "selectReaderForIssues";
     }
@@ -92,10 +102,20 @@ public class IssueUIController {
         Reader reader = readerOptional.get();
         List<Issue> issues = issueService.getIssuesByReaderId(readerId);
 
+
+
+
         model.addAttribute("reader", reader);
         model.addAttribute("issues", issues);
 
         return "readerIssues";
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ModelAndView handleAccessDeniedException(AccessDeniedException ex) {
+        ModelAndView modelAndView = new ModelAndView("access-denied");
+        modelAndView.addObject("message", ex.getMessage());
+        return modelAndView;
     }
 
 
