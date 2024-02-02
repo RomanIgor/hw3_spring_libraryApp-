@@ -38,12 +38,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // Poți adăuga logica pentru verificarea dacă contul este blocat
+        return true; 
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // Poți adăuga logica pentru verificarea expirării credențialelor
+        return true; 
     }
 
     @Override
