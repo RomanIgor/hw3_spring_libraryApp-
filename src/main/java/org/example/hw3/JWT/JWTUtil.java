@@ -24,7 +24,7 @@ public class JWTUtil {
                 .withSubject("User details")
                 .withClaim("username", username)
                 .withIssuedAt(new Date())
-                .withIssuer("alishev")
+                .withIssuer("roman")
                 .withExpiresAt(expirationDate)
                 .sign(Algorithm.HMAC256(secret));
     }
@@ -32,7 +32,7 @@ public class JWTUtil {
     public String validateTokenAndRetrieveClaim(String token) throws JWTVerificationException {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
                 .withSubject("User details")
-                .withIssuer("alishev")
+                .withIssuer("roman")
                 .build();
 
         DecodedJWT jwt = verifier.verify(token);
